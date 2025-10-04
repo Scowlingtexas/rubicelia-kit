@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Rubicelia: Ecos del Trono Carmesí — Portada</title>
+<style>
+  :root{
+    --bg:#0a0b0f; --ink:#e8e8ef; --muted:#a3a6b3; --accent:#d13b3b; --line:#1b1d26;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:
+      radial-gradient(1200px 600px at 80% -10%, #2b2133 0%, rgba(43,33,51,0) 60%),
+      radial-gradient(900px 500px at -10% 110%, #1f2c44 0%, rgba(31,44,68,0) 60%),
+      linear-gradient(180deg, #0b0d12, #090a0e);
+    color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    display:flex;align-items:center;justify-content:center;padding:20px;
+  }
+  .wrap{max-width:980px;width:100%;text-align:center;position:relative}
+  header{padding:10px}
+  h1{font-size:clamp(26px,4.5vw,48px);margin:0 0 6px;font-weight:800;letter-spacing:.3px}
+  .slogan{font-size:clamp(14px,2.2vw,20px);color:var(--muted);margin:0 0 16px;opacity:.9;
+    animation:float 6s ease-in-out infinite}
+  @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
+  .logo-area{display:flex;align-items:center;justify-content:center;gap:16px;margin:16px 0 22px}
+  .logo{width:92px;height:92px;border-radius:20px;border:2px dashed #444;background:#0f1219 center/cover no-repeat;
+    box-shadow:0 0 0 1px #1d2030 inset, 0 10px 30px rgba(0,0,0,.35)}
+  .btn{appearance:none;border:1px solid #2b2e3c;background:#121420;color:var(--ink);
+    border-radius:12px;padding:10px 14px;font-size:14px;cursor:pointer}
+  .btn.primary{background:var(--accent);border-color:transparent;font-weight:600}
+  .btnrow{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:12px 0 0}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
+  .card{border:1px solid var(--line);background:rgba(17,19,28,.6);backdrop-filter:blur(4px);
+    border-radius:16px;padding:14px;text-align:left}
+  .card h3{margin:0 0 6px;font-size:15px}
+  .link{display:block;color:#fff;text-decoration:none;padding:10px;border:1px solid #2b2e3c;border-radius:10px;margin:6px 0;
+    background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02))}
+  .small{font-size:12px;color:var(--muted)}
+  footer{margin-top:18px;color:var(--muted);font-size:12px}
+  .ghost{opacity:.75}
+  .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:12px; padding:0 6px;
+    border:1px solid #35384a;border-radius:6px; background:#151826}
+  .toggle{position:absolute;right:8px;top:8px;display:flex;align-items:center;gap:6px;color:var(--muted);font-size:12px}
+  input[type=file]{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="toggle"><label><input id="fx" type="checkbox"> Animación</label></div>
+  <header>
+    <div class="logo-area">
+      <div class="logo" id="logoPreview" title="Sube un logo opcional"></div>
+      <label class="btn" for="logoInput">Subir logo</label>
+      <input id="logoInput" type="file" accept="image/*">
+    </div>
+    <h1>Rubicelia: Ecos del Trono Carmesí</h1>
+    <p class="slogan" id="slogan">Rompe el eco o aprende a vivir en él.</p>
+    <div class="btnrow">
+      <a class="btn primary" href="Tarjeta_DM_Prologo_Completo_v1_1.html">Empezar sesión (Prólogo)</a>
+      <a class="btn" href="Checklist_DM_Movil_v1_0.html">Checklist interactivo</a>
+    </div>
+  </header>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Capítulos 1–3</h3>
+      <a class="link" href="Tarjeta_DM_Cap1_v1_1.html">Cap. 1 — Mansión</a>
+      <a class="link" href="Tarjeta_DM_Cap2_v1_1.html">Cap. 2 — Pantano</a>
+      <a class="link" href="Tarjeta_DM_Cap3_v1_1.html">Cap. 3 — Criptas</a>
+      <p class="small"></p>
+    </div>
+    <div class="card">
+      <h3>Capítulos 4–6</h3>
+      <a class="link" href="Tarjeta_DM_Cap4_v1_1.html">Cap. 4 — Minas/Talleres</a>
+      <a class="link" href="Tarjeta_DM_Cap5_v1_1.html">Cap. 5 — Pirámide</a>
+      <a class="link" href="Tarjeta_DM_Cap6_v1_1.html">Cap. 6 — Monasterio</a>
+      <p class="small"></p>
+    </div>
+    <div class="card">
+      <h3>Capítulos 7–10</h3>
+      <a class="link" href="Tarjeta_DM_Cap7_v1_1.html">Cap. 7 — Brumargenta</a>
+      <a class="link" href="Tarjeta_DM_Cap8_v1_1.html">Cap. 8 — Umbralfoso</a>
+      <a class="link" href="Tarjeta_DM_Cap9_v1_1.html">Cap. 9 — Fortaleza</a>
+      <a class="link" href="Tarjeta_DM_Cap10_v1_1.html">Cap. 10 — Trono Carmesí</a>
+      <p class="small"></p>
+    </div>
+    <div class="card">
+      <h3>Final y control</h3>
+      <a class="link" href="Tarjeta_DM_Epilogos_v1_0.html">Epílogos por banderas</a>
+      <a class="link" href="Portada_Checklist_Banderas_v1_1.docx">Portada/Checklist (DOCX)</a>
+      <p class="small">Consulta el checklist para derivar al epílogo correcto.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p class="ghost">Sugerencia: agrega esta página a pantalla de inicio. En iOS, comparte → “Añadir a pantalla de inicio”. En escritorio, usa <span class="kbd">Ctrl/Cmd</span>+<span class="kbd">D</span> para guardarla en favoritos.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const LSK = "rubicelia_portadilla_logo";
+  const logo = document.getElementById('logoPreview');
+  const file = document.getElementById('logoInput');
+  const fx = document.getElementById('fx');
+  const slogan = document.getElementById('slogan');
+
+  function loadLogo(){
+    const data = localStorage.getItem(LSK);
+    if(data) logo.style.backgroundImage = 'url('+data+')';
+  }
+  function saveLogo(data){
+    localStorage.setItem(LSK, data);
+  }
+  file.addEventListener('change', ev=>{
+    const f = ev.target.files[0]; if(!f) return;
+    const reader = new FileReader();
+    reader.onload = ()=>{ saveLogo(reader.result); loadLogo(); };
+    reader.readAsDataURL(f);
+  });
+  loadLogo();
+
+  // Toggle animation
+  fx.addEventListener('change', ()=>{
+    slogan.style.animation = fx.checked ? 'float 6s ease-in-out infinite' : 'none';
+  });
+  // Respect reduced motion
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    slogan.style.animation = 'none';
+    fx.checked = false;
+  } else {
+    fx.checked = true;
+  }
+})();
+</script>
+</body>
+</html>
