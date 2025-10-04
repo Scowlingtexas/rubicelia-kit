@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<title>Tarjeta rápida del DM — Capítulo 2 — Pantano de las Luciérnagas Marchitas</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+  /* ==== Ajustes globales para texto sobre fondos oscuros ==== */
+  :root{
+    --text:#e8e8e8;
+    --line: rgba(255,255,255,.10);
+    /* Cambia esta variable para el “modo vidrio”: */
+    --cell-bg: rgba(16,18,19,.65); /* <- 65% oscuro translúcido */
+  }
+  html,body{color:var(--text)}
+
+  /* ===== Tablas y cajas ===== */
+  table{ width:100%; border-collapse: collapse; background:transparent !important; }
+  thead th{
+    background: rgba(0,0,0,.55) !important; /* cabecera un poco más marcada */
+    color: var(--text);
+    border: 1px solid var(--line);
+  }
+  th, td{
+    background: var(--cell-bg) !important;   /* MODO VIDRIO */
+    color: var(--text);
+    border: 1px solid var(--line);
+  }
+
+  /* Píldoras/etiquetas (por si las usas) */
+  .badge, .tag, .pill, code, kbd, mark{
+    background: rgba(0,0,0,.35) !important;
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 8px; padding: 2px 6px;
+  }
+
+  /* Inputs (si hubiera) */
+  input, select, textarea{
+    background: rgba(0,0,0,.45) !important;
+    color: var(--text);
+    border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px;
+  }
+
+  /* Líneas y cajas horizontales */
+  hr{ border:0; border-top:1px solid var(--line); }
+
+  /* Imprimible limpio */
+  @media print{
+    :root{ --text:#000; --line: #0002; }
+    body{ background:#fff !important; color:#000; }
+    thead th, th, td{ background:#fff !important; color:#000; border-color:#0002; }
+    .badge, .tag, .pill, code, kbd, mark{ background:#0001 !important; color:#000; border-color:#0002; }
+  }
+</style>
+
+<style>
+:root{--ink:#111;--muted:#555;--line:#ddd}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);margin:24px;line-height:1.25}
+header{border-bottom:2px solid var(--line);margin-bottom:10px;padding-bottom:6px}
+h1{font-size:20px;margin:0 0 2px 0}
+h2{font-size:16px;margin:14px 0 6px}
+h3{font-size:14px;margin:10px 0 4px}
+p,li{font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.muted{color:var(--muted)}
+.tiny{font-size:11px;color:var(--muted)}
+ul.checklist{list-style:none;padding-left:0;margin:6px 0}
+ul.checklist li{margin:2px 0}
+ul.checklist li::before{content:"□ ";margin-right:6px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;margin:6px 0}
+th,td{border:1px solid var(--line);padding:6px;font-size:12px;vertical-align:top}
+th{background:#f9f9f9;text-align:left}
+.pill{display:inline-block;padding:2px 6px;border-radius:999px;border:1px solid var(--line);font-size:11px;margin-right:6px}
+.foot{border-top:2px solid var(--line);margin-top:10px;padding-top:8px}
+@media print{body{margin:10mm}header,.foot{border-color:#aaa}}
+</style>
+</head>
+<body>
+<!-- Fondo dinámico por capítulo -->
+<style>
+  /* Cambia la URL en --bg para cada capítulo */
+  :root{ --bg: url('fondos/cap2_pantano.png'); }
+
+  html,body{height:100%}
+  body{
+    margin:0;
+    /* 3 capas: acentos sutiles + velo + imagen capítulo */
+    background-image:
+      radial-gradient(ellipse at 20% -10%, rgba(255,255,255,.04), rgba(0,0,0,0) 40%),
+      linear-gradient(rgba(10,12,14,.62), rgba(10,12,14,.62)),
+      var(--bg);
+    background-size: 100% 100%, cover, cover;
+    background-position: center, center, center;
+    background-attachment: fixed, fixed, fixed;
+    color:#e8e8e8;
+  }
+
+  /* Imprimible limpio */
+  @media print{
+    body{ background:#fff !important; color:#000; }
+    .card, .container, .wrap, .sheet { background:#fff !important; border-color:#0001; }
+  }
+</style> 
+<!-- Fondo dinámico por capítulo -->
+<!-- Botón Regresar -->
+<style>
+  .back-btn{
+    position: fixed; top: 16px; right: 16px; z-index: 9999;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:8px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+    background: rgba(24,26,27,.65); color:#fff; cursor:pointer;
+    font: 500 14px/1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+  }
+  .back-btn:hover{ background: rgba(24,26,27,.85); transform: translateY(-1px); }
+  .back-btn:active{ transform: translateY(0); }
+  .back-btn svg{ display:block }
+  @media (prefers-color-scheme: light){
+    .back-btn{ background: rgba(255,255,255,.75); color:#111; border-color: rgba(0,0,0,.1); }
+  }
+  @media print{ .back-btn{ display:none !important; } }
+</style>
+
+<button id="btn-back" class="back-btn"
+        aria-label="Regresar" title="Regresar (Esc)"
+        data-home="Portada_Rubicelia_v1_0.html">
+  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span>Regresar</span>
+</button>
+
+<noscript>
+  <a href="Portada_Rubicelia_v1_0.html" class="back-btn" style="text-decoration:none">← Regresar</a>
+</noscript>
+
+<script>
+(function(){
+  var btn = document.getElementById('btn-back');
+  if(!btn) return;
+  var HOME = btn.getAttribute('data-home') || 'index.html';
+
+  function sameOriginReferrer(){
+    try{
+      if(!document.referrer) return false;
+      var r = new URL(document.referrer);
+      return r.origin === location.origin;
+    }catch(e){ return false; }
+  }
+  function goBackSmart(){
+    if (sameOriginReferrer() && history.length > 1) {
+      history.back();
+    } else {
+      location.href = HOME;
+    }
+  }
+  btn.addEventListener('click', goBackSmart);
+  // Atajo de teclado: ESC
+  window.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ e.preventDefault(); goBackSmart(); }
+  });
+})();
+</script>
+<!-- /Botón Regresar -->
+<header>
+<h1>Tarjeta rápida del DM — Capítulo 2 — Pantano de las Luciérnagas Marchitas</h1><p class="muted" data-brand="rubicelia">Rubicelia: Ecos del Trono Carmesí — “Rompe el eco o aprende a vivir en él.”</p>
+<p class="muted"></p>
+<p class="tiny">CD de referencia: Fácil 10 · Media 13 · Difícil 15 · Muy difícil 17 (ajusta a tu mesa)</p>
+</header>
+<section class="card">
+<h2>Resumen de escena</h2>
+<ul class="checklist">
+<li>Bruma baja, agua tibia hasta la rodilla, luciérnagas formando patrones</li>
+<li>Exploran 1–4 rutas y convergen en el <b>Menhir Hundido</b></li>
+<li>Pistas del <b>Mapa de Sangre</b>; opción de trato con la <b>Bruja Verde</b></li>
+<li>Salida hacia Cap. 3: <b>Criptas bajo la Capilla Rota</b></li>
+</ul>
+</section>
+<div class="grid">
+<section class="card">
+<h3>A) Pasarela de Raíces — Trampas naturales</h3>
+<table>
+<tr><th>Detección</th><td>Arenas movedizas y raíces resbaladizas (Percepción/Supervivencia CD 12–13)</td></tr>
+<tr><th>Superación</th><td>Atletismo/Acrobacias con cuerda y estacas; planificación reduce riesgo</td></tr>
+<tr><th>Encuentro</th><td><b>Swarm of Insects</b>; <b>Giant Toad</b> o <b>Giant Crocodile</b> (según nivel)</td></tr>
+<tr><th>Botín (1)</th><td>Potion of Healing · Wand of Secrets <span class="pill">[Ligada]</span> · Scroll: Detect Magic</td></tr>
+</table>
+</section>
+<section class="card">
+<h3>B) Sendero de las Luciérnagas — Puzle de patrón</h3>
+<table>
+<tr><th>Puzle</th><td>Seguir constelaciones: <b>corazón → ojo → círculo roto</b> abre paso seguro</td></tr>
+<tr><th>Fallo</th><td>Aparece <b>Will-o'-Wisp</b> y trampa de turba</td></tr>
+<tr><th>Botín (1)</th><td>Potion of Water Breathing · Scroll: Detect Magic · Cloak of Protection <span class="pill">[Bendita]</span></td></tr>
+</table>
+</section>
+<section class="card">
+<h3>C) Cabaña Encallada — Trato o engaño</h3>
+<table>
+<tr><th>PNJ</th><td><b>Green Hag</b> prefiere pactos; combate solo si hay provocación clara</td></tr>
+<tr><th>Interacción</th><td>Intercambia pistas por recuerdo/favor; revela pista mayor del <b>Mapa de Sangre</b></td></tr>
+<tr><th>Botín (1)</th><td>Ring of Swimming <span class="pill">[Ligado]</span> · Scroll: Speak with Animals · Potion of Healing</td></tr>
+</table>
+</section>
+<section class="card">
+<h3>D) Isla de los Ahogados — Tensión con no-muertos</h3>
+<table>
+<tr><th>Terreno</th><td>Tablas podridas y hoyos de turba (Atletismo/Acrobacias)</td></tr>
+<tr><th>Encuentro</th><td><b>Zombies</b> emergentes · <b>Ghoul</b> merodeando</td></tr>
+<tr><th>Botín (1–2)</th><td>Scroll: Protection from Evil and Good · Scroll: Sanctuary · Potion of Healing · Pliegue del <b>Mapa de Sangre</b></td></tr>
+</table>
+</section>
+</div>
+<section class="card">
+<h3>E) Menhir Hundido — Salida común</h3>
+<table>
+<tr><th>Acción</th><td>Ofrenda (hierbas/luz de luciérnaga) para abrir el conducto a las <b>Criptas</b></td></tr>
+<tr><th>Recompensa</th><td>Wand of Secrets si cumplieron el recado de la bruja</td></tr>
+</table>
+</section>
+<section class="card">
+<h3>Ajustes de balance</h3>
+<ul class="checklist">
+<li>Grupo pequeño: 1 encuentro por ruta</li>
+<li>Grupo numeroso: 1 encuentro + peligro ambiental</li>
+<li>Tesoro total: 2–3 objetos mágicos máx.</li>
+</ul>
+</section>
+<section class="card">
+<h3>Banderas</h3>
+<table>
+<tr><th>F_MAPA</th><td>+1 por pliegue; +1 si descifran patrón de luciérnagas</td></tr>
+<tr><th>F_PUEBLO</th><td>+1 si identifican a un ausente</td></tr>
+<tr><th>F_MALDICION</th><td>0; leve si rompen juramentos de la Cabaña</td></tr>
+</table>
+</section>
+<section class="card"><h3>Puente (lectura) → Cap. 3</h3><p>El menhir hundido giró con un crujido y expulsó una corriente de aire frío con olor a incienso viejo. Un camino de losas rotas descendió hacia bóvedas donde aún colgaban campanas agrietadas: las <b>Criptas bajo la Capilla Rota</b>.</p></section><section class="card"><h3>Pistas (para DM)</h3><h4>Sendero de Luciérnagas — Patrón</h4><table><tr><th>Señales</th><td><ul><li>Las luciérnagas forman figuras si apagan luces fuertes.</li><li>Lodo menos profundo cerca de ciertos ‘dibujos’.</li></ul></td></tr><tr><th>Pistas escalonadas</th><td><ul><li>Pista 1 (Supervivencia/Naturaleza CD 12): Tres figuras se repiten.</li><li>Pista 2 (Arcana/Religión CD 13): Corazón → Ojo → Círculo roto = sacrificio, vigilancia, romper ciclo.</li><li>Pista 3 (Acción): Avanza en ese orden; si fallan, esperen 1 turno para reiniciar.</li></ul></td></tr><tr><th>Solución (DM)</th><td>Seguir Corazón → Ojo → Círculo roto en tres claros consecutivos.</td></tr><tr><th>Bypass/alternativas</th><td>Detect Magic identifica nodos; tablones y cuerdas con Atletismo.</td></tr></table><h4>Menhir Hundido — Ofrenda viva</h4><table><tr><th>Señales</th><td><ul><li>El menhir vibra con luz natural (no mágica).</li><li>Rechaza metal o sangre.</li></ul></td></tr><tr><th>Pistas escalonadas</th><td><ul><li>Pista 1 (Naturaleza/Historia CD 12): Menhir druídico → prefiere vida sobre riqueza.</li><li>Pista 2 (Arcana CD 13): Responde a ‘luz viva’: luciérnagas, hierbas, agua de lluvia.</li><li>Pista 3 (Acción): Depositar 3 luciérnagas + hojas húmedas en la cavidad.</li></ul></td></tr><tr><th>Solución (DM)</th><td>Colocar una ofrenda viva abre el conducto a las criptas.</td></tr><tr><th>Bypass/alternativas</th><td>Pedir a la Bruja Verde una ‘semilla de luz’ (trueque).</td></tr></table></section><div class="foot tiny"><p><b>Notas rápidas:</b> Usa rasgos [Ligada]/[Bendita]/[Maldita] solo como trama narrativa — no alteran reglas oficiales.</p></div>
+<style>
+  /* Parche: deja todo sin fondo para que se vea la imagen */
+  :root{
+    --cell-bg: transparent !important;
+    --line: rgba(255,255,255,.18); /* bordes sutiles sobre fondo oscuro */
+  }
+  .card{
+    background: transparent !important;
+    border-color: var(--line) !important;
+  }
+  thead th, th, td{
+    background: transparent !important;
+    border-color: var(--line) !important;
+  }
+</style>
+</body>
+</html>

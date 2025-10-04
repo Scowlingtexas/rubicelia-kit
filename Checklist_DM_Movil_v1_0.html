@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Checklist DM — Campaña Rubicelia (Móvil)</title>
+<style>
+  :root{
+    --ink:#101114; --muted:#646b78; --line:#e6e8eb; --bg:#ffffff; --accent:#cc2a2a;
+    --pad:14px; --radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.3}
+  header{position:sticky;top:0;background:linear-gradient(180deg,#fff,rgba(255,255,255,.95));backdrop-filter:saturate(140%) blur(6px);
+    border-bottom:1px solid var(--line);padding:10px var(--pad);z-index:10}
+  h1{font-size:18px;margin:0 0 6px}
+  .sub{color:var(--muted);font-size:12px;margin:0}
+  main{padding:8px var(--pad) 80px}
+  section.card{border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin:10px 0}
+  section.card h2{font-size:16px;margin:0 0 8px}
+  section.card h3{font-size:14px;margin:8px 0 6px}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  .field{flex:1 1 180px}
+  label{display:block;font-size:12px;color:var(--muted);margin:2px 0}
+  input[type="text"],input[type="date"],select,textarea{
+    width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:14px;background:#fff
+  }
+  textarea{min-height:70px}
+  .group{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid var(--line);border-radius:999px;padding:8px 10px;font-size:13px;display:inline-flex;align-items:center;gap:6px}
+  .chip input{transform:scale(1.2)}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-size:11px;color:var(--muted);margin-left:6px}
+  .table{width:100%;border-collapse:collapse}
+  .table th,.table td{border:1px solid var(--line);padding:8px;font-size:13px;vertical-align:top}
+  .table th{background:#fafafa;text-align:left}
+  .btn{appearance:none;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;font-size:14px}
+  .btn.primary{border-color:transparent;background:var(--accent);color:#fff}
+  .btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .logo-wrap{display:flex;align-items:center;gap:10px}
+  .logo{width:40px;height:40px;border-radius:10px;border:1px dashed var(--line);background:#fff center/cover no-repeat}
+  .help{font-size:11px;color:var(--muted)}
+  footer{position:fixed;left:0;right:0;bottom:0;border-top:1px solid var(--line);background:#fff;padding:8px var(--pad);display:flex;gap:8px}
+  .result{font-weight:600}
+  @media (min-width:720px){
+    main{max-width:920px;margin:0 auto}
+  }
+  @media print{
+    header,footer{position:static}
+    footer{border-top:none}
+  }
+</style>
+</head>
+<body>
+<!-- Botón Regresar -->
+<style>
+  .back-btn{
+    position: fixed; bottom: 16px; right: 16px; z-index: 9999;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:8px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+    background: rgba(24,26,27,.65); color:#fff; cursor:pointer;
+    font: 500 14px/1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+  }
+  .back-btn:hover{ background: rgba(24,26,27,.85); transform: translateY(-1px); }
+  .back-btn:active{ transform: translateY(0); }
+  .back-btn svg{ display:block }
+  @media (prefers-color-scheme: light){
+    .back-btn{ background: rgba(255,255,255,.75); color:#111; border-color: rgba(0,0,0,.1); }
+  }
+  @media print{ .back-btn{ display:none !important; } }
+</style>
+
+<button id="btn-back" class="back-btn"
+        aria-label="Regresar" title="Regresar (Esc)"
+        data-home="Portada_Rubicelia_v1_0.html">
+  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span>Regresar</span>
+</button>
+
+<noscript>
+  <a href="Portada_Rubicelia_v1_0.html" class="back-btn" style="text-decoration:none">← Regresar</a>
+</noscript>
+
+<script>
+(function(){
+  var btn = document.getElementById('btn-back');
+  if(!btn) return;
+  var HOME = btn.getAttribute('data-home') || 'index.html';
+
+  function sameOriginReferrer(){
+    try{
+      if(!document.referrer) return false;
+      var r = new URL(document.referrer);
+      return r.origin === location.origin;
+    }catch(e){ return false; }
+  }
+  function goBackSmart(){
+    if (sameOriginReferrer() && history.length > 1) {
+      history.back();
+    } else {
+      location.href = HOME;
+    }
+  }
+  btn.addEventListener('click', goBackSmart);
+  // Atajo de teclado: ESC
+  window.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ e.preventDefault(); goBackSmart(); }
+  });
+})();
+</script>
+<!-- /Botón Regresar -->
+<header>
+  <div class="logo-wrap">
+    <div class="logo" id="logoPreview" title="Logo de la campaña (opcional)"></div>
+    <div style="flex:1 1 auto">
+      <h1>Rubicelia: Ecos del Trono Carmesí</h1><p class='sub'>“Rompe el eco o aprende a vivir en él.”</p><p class='sub'>Checklist del DM — versión móvil</p>
+      <p class="sub">Versión móvil (guarda tus cambios en este dispositivo)</p>
+    </div>
+    <label class="btn" for="logoInput">Subir logo</label>
+    <input id="logoInput" type="file" accept="image/*" style="display:none">
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Datos de mesa</h2>
+    <div class="row">
+      <div class="field"><label>Mesa/Grupo</label><input id="mesa" type="text" placeholder="Nombre del grupo"></div>
+      <div class="field"><label>DM</label><input id="dm" type="text" placeholder="Tu nombre"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>Fecha</label><input id="fecha" type="date"></div>
+      <div class="field"><label>Nivel del grupo</label><input id="nivel" type="text" placeholder="Ej. 5"></div>
+    </div>
+    <div class="row">
+      <div class="field" style="flex:1 1 100%"><label>Jugadores</label><textarea id="jugadores" placeholder="Nombres de jugadores / PJs"></textarea></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Banderas principales</h2>
+    <h3>Rubicelia</h3>
+    <div class="group" id="rubiceliaFragmentos">
+      <label class="chip"><input type="radio" name="rubi" value="0"> 0</label>
+      <label class="chip"><input type="radio" name="rubi" value="1"> 1</label>
+      <label class="chip"><input type="radio" name="rubi" value="2"> 2</label>
+      <label class="chip"><input type="radio" name="rubi" value="3"> 3</label>
+      <label class="chip"><input type="checkbox" id="rubiEns"> Ensamblada</label>
+      <span class="pill">Eco I si Sacrificio (Cap. 6)</span>
+    </div>
+
+    <h3>Anclajes rotos (Plano Sombrío)</h3>
+    <div class="group" id="anclajes">
+      <label class="chip"><input type="radio" name="anc" value="0"> 0</label>
+      <label class="chip"><input type="radio" name="anc" value="1"> 1</label>
+      <label class="chip"><input type="radio" name="anc" value="2"> 2</label>
+      <label class="chip"><input type="radio" name="anc" value="3"> 3</label>
+    </div>
+
+    <div class="group">
+      <label class="chip"><input type="checkbox" id="sacrificio"> F_SACRIFICIO_VIENTO</label>
+      <label class="chip"><input type="checkbox" id="traidorMarcado"> F_TRAIDOR — Marcado</label>
+      <label class="chip"><input type="checkbox" id="traidorRevelado"> Revelado</label>
+      <label class="chip"><input type="checkbox" id="traidorDerrota"> Causó derrota</label>
+    </div>
+
+    <h3>Maldiciones</h3>
+    <div class="group">
+      <label class="chip"><input type="checkbox" id="malMarca"> Marca Carmesí</label>
+      <label class="chip"><input type="checkbox" id="malMummy"> Mummy’s Curse</label>
+      <label class="chip"><input type="checkbox" id="malOtra"> Otra</label>
+      <input id="malOtraTxt" type="text" placeholder="Describe la maldición (opcional)" style="flex:1 1 220px">
+    </div>
+
+    <h3>Mapa de Sangre / Eco</h3>
+    <div class="group" id="mapa">
+      <label class="chip"><input type="radio" name="mapa" value="0"> F_MAPA 0</label>
+      <label class="chip"><input type="radio" name="mapa" value="1"> 1</label>
+      <label class="chip"><input type="radio" name="mapa" value="2"> 2</label>
+      <label class="chip"><input type="radio" name="mapa" value="3"> 3</label>
+      <label class="chip"><input type="checkbox" id="ecoI"> Rubicelia — Eco I</label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>F_RIVAL — Estado de mini-jefes</h2>
+    <table class="table" id="rivalesTbl">
+      <tr><th>PNJ/Enemigo</th><th>Estado</th></tr>
+      <tr data-key="mayordomo"><td>Mayordomo Espectral</td><td>
+        <label class="chip"><input type="radio" name="mayordomo" value="vivo"> Vivo</label>
+        <label class="chip"><input type="radio" name="mayordomo" value="muerto"> Muerto</label>
+        <label class="chip"><input type="radio" name="mayordomo" value="huyo"> Huyó</label>
+      </td></tr>
+      <tr data-key="prior"><td>Prior (Wight/Wraith)</td><td>
+        <label class="chip"><input type="radio" name="prior" value="vivo"> Vivo</label>
+        <label class="chip"><input type="radio" name="prior" value="muerto"> Muerto</label>
+        <label class="chip"><input type="radio" name="prior" value="huyo"> Huyó</label>
+      </td></tr>
+      <tr data-key="mummy"><td>Mummy Matriarca</td><td>
+        <label class="chip"><input type="radio" name="mummy" value="vivo"> Vivo</label>
+        <label class="chip"><input type="radio" name="mummy" value="muerto"> Muerto</label>
+        <label class="chip"><input type="radio" name="mummy" value="huyo"> Huyó</label>
+      </td></tr>
+      <tr data-key="guijo"><td>Goblin Boss “Guijo”</td><td>
+        <label class="chip"><input type="radio" name="guijo" value="vivo"> Vivo</label>
+        <label class="chip"><input type="radio" name="guijo" value="muerto"> Muerto</label>
+        <label class="chip"><input type="radio" name="guijo" value="huyo"> Huyó</label>
+      </td></tr>
+      <tr data-key="duende"><td>Duende Hilandero (Imp/Sprite)</td><td>
+        <label class="chip"><input type="radio" name="duende" value="vivo"> Vivo</label>
+        <label class="chip"><input type="radio" name="duende" value="muerto"> Muerto</label>
+        <label class="chip"><input type="radio" name="duende" value="huyo"> Huyó</label>
+      </td></tr>
+      <tr data-key="hag"><td>Night Hag del Umbralfoso</td><td>
+        <label class="chip"><input type="radio" name="hag" value="vivo"> Vivo</label>
+        <label class="chip"><input type="radio" name="hag" value="muerto"> Muerto</label>
+        <label class="chip"><input type="radio" name="hag" value="huyo"> Huyó</label>
+      </td></tr>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>PNJs aliados / Contactos vivos</h2>
+    <div class="row">
+      <input id="pnj1" type="text" placeholder="Nombre — Nota">
+      <input id="pnj2" type="text" placeholder="Nombre — Nota">
+      <input id="pnj3" type="text" placeholder="Nombre — Nota">
+      <input id="pnj4" type="text" placeholder="Nombre — Nota">
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Claves para el final</h2>
+    <div class="group">
+      <label class="chip"><input type="checkbox" id="finDerrotaJefe"> Arconte derrotado</label>
+      <label class="chip"><input type="radio" name="surv" value="0"> 0 vivos</label>
+      <label class="chip"><input type="radio" name="surv" value="1"> 1 vivo</label>
+      <label class="chip"><input type="radio" name="surv" value="2+"> 2+ vivos</label>
+      <label class="chip"><input type="checkbox" id="ultimoCaeMald"> Último PJ cayó por maldición/veneno/hemorragia</label>
+    </div>
+    <div class="btnrow">
+      <button class="btn primary" id="btnSugerir">Sugerir epílogo</button>
+      <button class="btn" id="btnLimpiar">Limpiar marcadores</button>
+    </div>
+    <p class="help">La sugerencia aplica la lógica: si no derrotado → Malo; si traición decisiva → Traicionero; si derrotado y 0 vivos con maldición/veneno/hemorragia → Agridulce; resto → Bueno.</p>
+    <p>Epílogo sugerido: <span class="result" id="resultado">—</span></p>
+  </section>
+</main>
+
+<footer>
+  <button class="btn" id="btnExport">Exportar JSON</button>
+  <button class="btn" id="btnImport">Importar JSON</button>
+  <input id="importFile" type="file" accept="application/json" style="display:none">
+  <span class="help">Tus datos se guardan automáticamente en este dispositivo.</span>
+</footer>
+
+<script>
+(function(){
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
+  const LSKEY = "rubicelia_checklist_v1";
+  const LSKLOGO = "rubicelia_logo";
+
+  function save(){
+    const data = {};
+    // inputs
+    ["mesa","dm","fecha","nivel","jugadores","malOtraTxt","pnj1","pnj2","pnj3","pnj4"].forEach(id=>data[id]=$('#'+id)?.value||"");
+    // checkboxes
+    ["rubiEns","sacrificio","traidorMarcado","traidorRevelado","traidorDerrota","malMarca","malMummy","malOtra","ecoI","finDerrotaJefe","ultimoCaeMald"]
+      .forEach(id=>data[id]=$('#'+id)?.checked||false);
+    // radios
+    data["rubi"] = ($$('input[name="rubi"]:checked')[0]||{}).value||"";
+    data["anc"] = ($$('input[name="anc"]:checked')[0]||{}).value||"";
+    data["mapa"] = ($$('input[name="mapa"]:checked')[0]||{}).value||"";
+    data["surv"] = ($$('input[name="surv"]:checked')[0]||{}).value||"";
+    // rivales
+    ["mayordomo","prior","mummy","guijo","duende","hag"].forEach(k=>{
+      data["rv_"+k] = ($$('input[name="'+k+'"]:checked')[0]||{}).value||"";
+    });
+    localStorage.setItem(LSKEY, JSON.stringify(data));
+  }
+  function load(){
+    try{
+      const data = JSON.parse(localStorage.getItem(LSKEY)||"{}");
+      Object.entries(data).forEach(([k,v])=>{
+        const el = document.getElementById(k);
+        if(el && "value" in el) el.value = v;
+      });
+      ["rubi","anc","mapa","surv","mayordomo","prior","mummy","guijo","duende","hag"].forEach(name=>{
+        if(data[name]){
+          const el = document.querySelector('input[name="'+name+'"][value="'+data[name]+'"]');
+          if(el){ el.checked = true; }
+        }
+      });
+      ["rubiEns","sacrificio","traidorMarcado","traidorRevelado","traidorDerrota","malMarca","malMummy","malOtra","ecoI","finDerrotaJefe","ultimoCaeMald"]
+        .forEach(id=>{ const el = document.getElementById(id); if(el) el.checked = !!data[id]; });
+    }catch(e){ console.warn(e); }
+    // logo
+    const logo = localStorage.getItem(LSKLOGO);
+    if(logo) $('#logoPreview').style.backgroundImage = 'url('+logo+')';
+  }
+  function bind(){
+    document.body.addEventListener('change', save);
+    document.body.addEventListener('input', save);
+    // export/import
+    $('#btnExport').addEventListener('click', ()=>{
+      const blob = new Blob([localStorage.getItem(LSKEY)||"{}"], {type:"application/json"});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = "Checklist_Rubicelia.json";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+    $('#btnImport').addEventListener('click', ()=>$('#importFile').click());
+    $('#importFile').addEventListener('change', (ev)=>{
+      const file = ev.target.files[0]; if(!file) return;
+      const reader = new FileReader();
+      reader.onload = ()=>{ localStorage.setItem(LSKEY, reader.result); load(); };
+      reader.readAsText(file);
+    });
+    // suggest epilogue
+    $('#btnSugerir').addEventListener('click', ()=>{
+      const defeat = $('#finDerrotaJefe').checked;
+      const surv = ($$('input[name="surv"]:checked')[0]||{}).value||"";
+      const traitor = $('#traidorDerrota').checked;
+      const malEnd = $('#ultimoCaeMald').checked;
+      let res = "—";
+      if(!defeat){ res = "MALO"; }
+      else if(traitor){ res = "TRAICIONERO"; }
+      else if(defeat && surv==="0" && malEnd){ res = "AGRIDULCE"; }
+      else { res = "BUENO"; }
+      $('#resultado').textContent = res;
+    });
+    // clear
+    $('#btnLimpiar').addEventListener('click', ()=>{
+      if(!confirm("¿Borrar marcadores?")) return;
+      localStorage.removeItem(LSKEY);
+      $$('input').forEach(el=>{
+        if(el.type==="checkbox"||el.type==="radio") el.checked=false; else el.value="";
+      });
+      $('#resultado').textContent="—";
+    });
+    // logo
+    $('#logoInput').addEventListener('change', ev=>{
+      const file = ev.target.files[0]; if(!file) return;
+      const reader = new FileReader();
+      reader.onload = ()=>{
+        const dataUrl = reader.result;
+        localStorage.setItem(LSKLOGO, dataUrl);
+        $('#logoPreview').style.backgroundImage = 'url('+dataUrl+')';
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  load(); bind();
+})();
+</script>
+</body>
+</html>

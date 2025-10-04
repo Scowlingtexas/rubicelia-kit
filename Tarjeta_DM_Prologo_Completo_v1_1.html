@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Prólogo — La ciudad que aprendió a escuchar espejos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root{--ink:#111;--muted:#555;--line:#ddd}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);margin:24px;line-height:1.35}
+  h1{font-size:22px;margin:0 0 6px}
+  h2{font-size:16px;margin:18px 0 8px}
+  p{font-size:13px;margin:8px 0}
+  .scene{border-left:3px solid var(--line); padding-left:10px; margin:10px 0}
+  .muted{color:var(--muted); font-size:12px}
+</style>
+</head>
+<body>
+<!-- Fondo dinámico por capítulo -->
+<style>
+  /* Cambia la URL en --bg para cada capítulo */
+  :root{ --bg: url('fondos/prologo_llovizna.png'); }
+
+  html,body{height:100%}
+  body{
+    margin:0;
+    /* 3 capas: acentos sutiles + velo + imagen capítulo */
+    background-image:
+      radial-gradient(ellipse at 20% -10%, rgba(255,255,255,.04), rgba(0,0,0,0) 40%),
+      linear-gradient(rgba(10,12,14,.62), rgba(10,12,14,.62)),
+      var(--bg);
+    background-size: 100% 100%, cover, cover;
+    background-position: center, center, center;
+    background-attachment: fixed, fixed, fixed;
+    color:#e8e8e8;
+  }
+
+  /* Imprimible limpio */
+  @media print{
+    body{ background:#fff !important; color:#000; }
+    .card, .container, .wrap, .sheet { background:#fff !important; border-color:#0001; }
+  }
+</style> 
+<!-- Fondo dinámico por capítulo -->
+<!-- Botón Regresar -->
+<style>
+  .back-btn{
+    position: fixed; top: 16px; right: 16px; z-index: 9999;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:8px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+    background: rgba(24,26,27,.65); color:#fff; cursor:pointer;
+    font: 500 14px/1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+  }
+  .back-btn:hover{ background: rgba(24,26,27,.85); transform: translateY(-1px); }
+  .back-btn:active{ transform: translateY(0); }
+  .back-btn svg{ display:block }
+  @media (prefers-color-scheme: light){
+    .back-btn{ background: rgba(255,255,255,.75); color:#111; border-color: rgba(0,0,0,.1); }
+  }
+  @media print{ .back-btn{ display:none !important; } }
+</style>
+
+<button id="btn-back" class="back-btn"
+        aria-label="Regresar" title="Regresar (Esc)"
+        data-home="Portada_Rubicelia_v1_0.html">
+  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span>Regresar</span>
+</button>
+
+<noscript>
+  <a href="Portada_Rubicelia_v1_0.html" class="back-btn" style="text-decoration:none">← Regresar</a>
+</noscript>
+
+<script>
+(function(){
+  var btn = document.getElementById('btn-back');
+  if(!btn) return;
+  var HOME = btn.getAttribute('data-home') || 'index.html';
+
+  function sameOriginReferrer(){
+    try{
+      if(!document.referrer) return false;
+      var r = new URL(document.referrer);
+      return r.origin === location.origin;
+    }catch(e){ return false; }
+  }
+  function goBackSmart(){
+    if (sameOriginReferrer() && history.length > 1) {
+      history.back();
+    } else {
+      location.href = HOME;
+    }
+  }
+  btn.addEventListener('click', goBackSmart);
+  // Atajo de teclado: ESC
+  window.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ e.preventDefault(); goBackSmart(); }
+  });
+})();
+</script>
+<!-- /Botón Regresar -->
+<h1>Prólogo — La ciudad que aprendió a escuchar espejos</h1>
+<p>Lectura narrativa larga para mesa. Puedes abreviar escenas según el tiempo.</p>
+
+<h2>I. La carta en la puerta</h2>
+<div class="scene">
+<p>La lluvia no caía: subía por los cristales. En Valdoruin, las gárgolas escupían agua hacia el cielo como si el mundo quisiera vaciarse de recuerdos. Alguien clavó en la puerta de la posada una carta sellada en cera roja. El sello mostraba un corazón atravesado por un espejo.</p>
+<p>El posadero, que ya había visto inviernos beberse a hombres, no quiso tocarla. Fue una mano curiosa —tal vez la de uno de ustedes— la que quebró la cera. Dentro, cuatro líneas: <i>“Cuando un espejo llora, no refleja la verdad: la bebe. Si anhelan callar ese llanto, vengan donde la madera huele a vino. —M.”</i></p>
+</div>
+
+<h2>II. Rumores que no saben estarse quietos</h2>
+<div class="scene">
+<p>En la barra, la vieja Arselia dijo que en el muelle desaparecen personas que se afeitan frente a un vidrio barato. Un marinero juró que oyó campanas dentro de su cubo de agua. Un niño dejó sobre la mesa media moneda carmesí, como de vidrio que hubiera aprendido a sangrar. Nadie supo de dónde sacó eso.</p>
+<p>Los viejos del muelle no pronunciaron el nombre en voz alta, como si no quisieran despertar a la ciudad: <b>Arconte Carmesí</b>. Otros hablaron de un mayordomo que pone flores donde no queda nadie para olerlas. Y alguien mencionó una reliquia rota en tres: <b>Rubicelia</b>, la espada que canta nombres para no olvidarlos.</p>
+</div>
+
+<h2>III. La casa que respiraba</h2>
+<div class="scene">
+<p>La dirección escrita en la posdata los llevó a una mansión de ventanas altas. Los espejos lloraban <i>hacia arriba</i>. La madera olía a vino añejo y despedidas. No hacía viento, pero las cortinas se movían como si alguien acabara de cruzarlas. En el marco, un guante blanco dejó polvo de cera roja. “M.”</p>
+<p>Ese fue el primer rumor que se hizo verdad: el <b>Mayordomo Espectral</b>, un cuidador sin casa. No pedía nada, y por eso inquietaba. Abrió puertas que antes nadie sabía que existían.</p>
+</div>
+
+<h2>IV. Nombres, precios y promesas</h2>
+<div class="scene">
+<p>Hicieron preguntas. La ciudad respondió a su modo: con cartas que llegan tarde, con sombras que no pisan charcos. Cada uno de ustedes encontró una razón para subir esas escaleras: una deuda, una promesa, una fe, una curiosidad que no cabe en jaulas.</p>
+<p>En la mesa de la posada dejaron dicho a dónde iban, por si alguien preguntaba luego. Nadie prometió volver. Eso vino después, cuando entendieron que las promesas son espejos que se rompen si uno no las mira cada cierto tiempo.</p>
+</div>
+
+<h2>V. La campana rajada</h2>
+<div class="scene">
+<p>Antes de cruzar el umbral, sonó una campana rajada en la plaza. No fue un sonido limpio: fue una tos que arrastró agua. Pero hubo música dentro de esa tos, como si una ciudad en carne viva intentara recordar la nota que la sostenía.</p>
+<p>Si alguien miró hacia arriba, juraría que por un instante el cielo se inclinó para escuchar.</p>
+</div>
+
+<h2>VI. Puente al Capítulo 1</h2>
+<div class="scene">
+<p>La puerta cedió. Lo que fueran lágrimas que subían por los espejos se volvió agua real corriendo a sus botas. El primer paso sonó más fuerte que los demás. Fue el sonido de una historia eligiendo empezar.</p>
+</div>
+
+<h2>Notas para el DM (no leer en mesa)</h2>
+<ul>
+  <li>Ofrece 2–3 rumores de la sección II según el trasfondo de los PJs.</li>
+  <li>Si hay PNJ clave, introdúcelo en la posada como “amigo de un amigo”.</li>
+  <li>Semilla temprana: menciona “tres fragmentos” de Rubicelia sin confirmar su naturaleza.</li>
+</ul>
+<style>
+  /* Parche: deja todo sin fondo para que se vea la imagen */
+  :root{
+    --cell-bg: transparent !important;
+    --line: rgba(255,255,255,.18); /* bordes sutiles sobre fondo oscuro */
+  }
+  .card{
+    background: transparent !important;
+    border-color: var(--line) !important;
+  }
+  thead th, th, td{
+    background: transparent !important;
+    border-color: var(--line) !important;
+  }
+</style>
+</body>
+</html>

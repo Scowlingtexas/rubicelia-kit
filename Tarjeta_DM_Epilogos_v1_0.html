@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<title>Epílogos de Campaña — Selección por banderas</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+  /* ==== Ajustes globales para texto sobre fondos oscuros ==== */
+  :root{
+    --text:#e8e8e8;
+    --line: rgba(255,255,255,.10);
+    /* Cambia esta variable para el “modo vidrio”: */
+    --cell-bg: rgba(16,18,19,.65); /* <- 65% oscuro translúcido */
+  }
+  html,body{color:var(--text)}
+
+  /* ===== Tablas y cajas ===== */
+  table{ width:100%; border-collapse: collapse; background:transparent !important; }
+  thead th{
+    background: rgba(0,0,0,.55) !important; /* cabecera un poco más marcada */
+    color: var(--text);
+    border: 1px solid var(--line);
+  }
+  th, td{
+    background: var(--cell-bg) !important;   /* MODO VIDRIO */
+    color: var(--text);
+    border: 1px solid var(--line);
+  }
+
+  /* Píldoras/etiquetas (por si las usas) */
+  .badge, .tag, .pill, code, kbd, mark{
+    background: rgba(0,0,0,.35) !important;
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 8px; padding: 2px 6px;
+  }
+
+  /* Inputs (si hubiera) */
+  input, select, textarea{
+    background: rgba(0,0,0,.45) !important;
+    color: var(--text);
+    border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px;
+  }
+
+  /* Líneas y cajas horizontales */
+  hr{ border:0; border-top:1px solid var(--line); }
+
+  /* Imprimible limpio */
+  @media print{
+    :root{ --text:#000; --line: #0002; }
+    body{ background:#fff !important; color:#000; }
+    thead th, th, td{ background:#fff !important; color:#000; border-color:#0002; }
+    .badge, .tag, .pill, code, kbd, mark{ background:#0001 !important; color:#000; border-color:#0002; }
+  }
+</style>
+
+<style>
+  :root{--ink:#111;--muted:#555;--line:#ddd}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);margin:24px;line-height:1.25}
+  header{border-bottom:2px solid var(--line);margin-bottom:10px;padding-bottom:6px}
+  h1{font-size:20px;margin:0 0 2px 0}
+  h2{font-size:16px;margin:14px 0 6px}
+  h3{font-size:14px;margin:10px 0 4px}
+  p,li{font-size:12px}
+  .card{border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:10px}
+  ul.checklist{list-style:none;padding-left:0;margin:6px 0}
+  ul.checklist li{margin:2px 0}
+  ul.checklist li::before{content:"□ ";margin-right:6px;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;margin:6px 0}
+  th,td{border:1px solid var(--line);padding:6px;font-size:12px;vertical-align:top}
+  th{background:#f9f9f9;text-align:left}
+</style>
+</head>
+<body>
+<!-- Fondo dinámico por capítulo -->
+<style>
+  /* Cambia la URL en --bg para cada capítulo */
+  :root{ --bg: url('fondos/epilogos.png'); }
+
+  html,body{height:100%}
+  body{
+    margin:0;
+    /* 3 capas: acentos sutiles + velo + imagen capítulo */
+    background-image:
+      radial-gradient(ellipse at 20% -10%, rgba(255,255,255,.04), rgba(0,0,0,0) 40%),
+      linear-gradient(rgba(10,12,14,.62), rgba(10,12,14,.62)),
+      var(--bg);
+    background-size: 100% 100%, cover, cover;
+    background-position: center, center, center;
+    background-attachment: fixed, fixed, fixed;
+    color:#e8e8e8;
+  }
+
+  /* Imprimible limpio */
+  @media print{
+    body{ background:#fff !important; color:#000; }
+    .card, .container, .wrap, .sheet { background:#fff !important; border-color:#0001; }
+  }
+</style> 
+<!-- Fondo dinámico por capítulo -->
+<!-- Botón Regresar -->
+<style>
+  .back-btn{
+    position: fixed; top: 16px; right: 16px; z-index: 9999;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:8px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+    background: rgba(24,26,27,.65); color:#fff; cursor:pointer;
+    font: 500 14px/1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+  }
+  .back-btn:hover{ background: rgba(24,26,27,.85); transform: translateY(-1px); }
+  .back-btn:active{ transform: translateY(0); }
+  .back-btn svg{ display:block }
+  @media (prefers-color-scheme: light){
+    .back-btn{ background: rgba(255,255,255,.75); color:#111; border-color: rgba(0,0,0,.1); }
+  }
+  @media print{ .back-btn{ display:none !important; } }
+</style>
+
+<button id="btn-back" class="back-btn"
+        aria-label="Regresar" title="Regresar (Esc)"
+        data-home="Portada_Rubicelia_v1_0.html">
+  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span>Regresar</span>
+</button>
+
+<noscript>
+  <a href="Portada_Rubicelia_v1_0.html" class="back-btn" style="text-decoration:none">← Regresar</a>
+</noscript>
+
+<script>
+(function(){
+  var btn = document.getElementById('btn-back');
+  if(!btn) return;
+  var HOME = btn.getAttribute('data-home') || 'index.html';
+
+  function sameOriginReferrer(){
+    try{
+      if(!document.referrer) return false;
+      var r = new URL(document.referrer);
+      return r.origin === location.origin;
+    }catch(e){ return false; }
+  }
+  function goBackSmart(){
+    if (sameOriginReferrer() && history.length > 1) {
+      history.back();
+    } else {
+      location.href = HOME;
+    }
+  }
+  btn.addEventListener('click', goBackSmart);
+  // Atajo de teclado: ESC
+  window.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ e.preventDefault(); goBackSmart(); }
+  });
+})();
+</script>
+<!-- /Botón Regresar -->
+<header>
+<h1>Epílogos de Campaña — Selección por banderas</h1><p class="muted" data-brand="rubicelia">Rubicelia: Ecos del Trono Carmesí — “Rompe el eco o aprende a vivir en él.”</p>
+<p class="muted">Usa el checklist para elegir el epílogo correcto. Rellena con nombres y detalles reales.</p>
+</header>
+<section class="card">
+<h2>Checklist de final → epílogo</h2>
+<ul class="checklist">
+<li>¿Arconte derrotado? sí/no</li>
+<li>¿Supervivientes? 0 / 1 / 2+</li>
+<li>¿F_TRAIDOR causó derrota/pérdida clave? sí/no → Traicionero</li>
+<li>Si no derrotado → Malo</li>
+<li>Si derrotado y 0 vivos con maldición/veneno/hemorragia → Agridulce</li>
+<li>Resto: Bueno (semilla de Neralis si ≥2 vivos)</li>
+</ul>
+<table>
+<tr><th>Moduladores</th><td><b>F_ANCLAJES</b>: menos ‘cicatriz’ mágica con 2–3 rotos · <b>Rubicelia</b>: ensamblada = sello público; 1–2/3 = guarda silenciosa · <b>F_SACRIFICIO_VIENTO</b>: tañido secreto en la lectura · <b>F_RIVAL</b>: PNJs vivos aparecen en escena</td></tr>
+</table>
+</section>
+<section class="card">
+<h2>Epílogo Bueno — “Las campanas vuelven a cantar”</h2>
+<p>Cuando el <b>Trono Carmesí</b> se apagó, el eco de los espejos dejó de trepar por las paredes. El corazón de cristal, ya sin cadenas, se agrietó como hielo al sol. El mundo no se enderezó de golpe, pero <b>volvió a recordar</b> cómo respirar sin miedo.</p>
+<p>Regresaron a Valdoruin con los nombres que aún quedan por decir en voz alta. En la plaza, la campana rajada probó un tañido tímido… y sonó. <i>[Si F_SACRIFICIO_VIENTO = true]</i> El viento trajo un segundo tañido, ese que solo oyen los que estuvieron allí.</p>
+<p>Rubicelia se alzó no como arma, sino como testigo. <i>[Si Rubicelia = 3/3 ensamblada]</i> Se consagró en ceremonia pública; <i>[Si ≤2/3]</i> guardará su luz en silencio hasta que el mundo la pida.</p>
+</section>
+<section class="card">
+<h2>Epílogo Malo — “La noche aprende nuestros nombres”</h2>
+<p>El Trono siguió latiendo cuando se cerró el pasillo. Los espejos respiraron hondo, y con el suspiro el mundo se encogió un dedo más. En la posada del muelle, alguien clavó un anuncio nuevo: <i>“Se buscan manos valientes. No prometemos gloria. Prometemos intentar volver.”</i></p>
+<p>Un puñado de rostros dio un paso adelante sin saber que tomaba una antorcha caída. <i>[F_ANCLAJES ≥ 1]</i> Cada anclaje roto será un faro para ellos. <i>[Si alguien escapó]</i> su testimonio tartamudo será la mecha de la siguiente marcha.</p>
+</section>
+<section class="card">
+<h2>Epílogo Agridulce — “Estatuas con viento dentro”</h2>
+<p>El Arconte cayó, y con él cayeron los espejos. Nadie <b>ganó</b> la última palabra. En Valdoruin no hubo desfile: hubo silencio útil. Se erigieron estatuas de piedra porosa para que el viento cuente lo que el relato no alcanza.</p>
+<p><i>[Último PJ cae por maldición/veneno/hemorragia]</i> La sala pareció pedir perdón. Rubicelia fue depositada ante el concejo. <i>[3/3 ensamblada]</i> la guardarán varios; <i>[≤2/3]</i> la guardará el tiempo.</p>
+</section>
+<section class="card">
+<h2>Epílogo Traicionero — “El espejo que devolvió otra cara”</h2>
+<p>No fue la oscuridad la que apagó la luz. Fue un gesto conocido. El Trono se alimentó del asombro y el Arconte brindó con una sombra cómplice. En la ciudad, el relato quedó partido: valentía y un nombre que nadie quiere pronunciar.</p>
+<p><i>[Si el traidor vive]</i> quizá camine entre la gente; <i>[si muere]</i> su silencio será un rumor sin orillas. <i>[Si Rubicelia se perdió]</i> la fortaleza aprendió nuevos caminos.</p>
+</section>
+<style>
+  /* Parche: deja todo sin fondo para que se vea la imagen */
+  :root{
+    --cell-bg: transparent !important;
+    --line: rgba(255,255,255,.18); /* bordes sutiles sobre fondo oscuro */
+  }
+  .card{
+    background: transparent !important;
+    border-color: var(--line) !important;
+  }
+  thead th, th, td{
+    background: transparent !important;
+    border-color: var(--line) !important;
+  }
+</style>
+</body>
+</html>
